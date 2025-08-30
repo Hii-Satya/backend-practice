@@ -1,4 +1,4 @@
-const express = require('express')
+import express from "express"
 const app = express()
 import cors from "cors"
 import cookieParser from "cookie-parser"
@@ -15,7 +15,13 @@ app.use(express.urlencoded({extended:true,limit:"16kb"}))
 //static is use for storing pdf image in the server
 app.use(express.static("public"))  //here public is the folder where we store the files
 
-//cookieparser is used to setand access the cookies of user's browser from the server
+//cookieparser is used to set and access the cookies of user's browser from the server
+app.use(cookieParser())
 
+// routes import
+import userRouter from "./routes/user.routes.js" 
+
+// routes declaration
+app.use("/api/v1/users",userRouter)
 
 export {app}
