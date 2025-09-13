@@ -23,13 +23,13 @@ const userSchema =new Schema({
         trim:true,
         index:true
     },
-    avtar:{
+    avatar:{
         type:String,
         required:true,
     },
     coverImage:{
         type:String,
-        required:true,
+    
     },
     watchHistory:[
         {
