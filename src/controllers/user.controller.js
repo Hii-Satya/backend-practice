@@ -9,8 +9,15 @@ import {ApiResponse} from '../utils/ApiResponse.js'
 const generateAccessAndRefreshToken=async(UserId)=>{
   try {
         const user=await User.findById(UserId)
+      if (!user) {
+      throw new ApiError(404, "User not found while generating tokens");  
+    }
+      // console.log(user)
         const accessToken= user.generateAccessToken()
+        console.log(accessToken)
         const refreshToken =user.generateRefreshToken()
+        console.log(refreshToken)
+
         user.refreshToken=refreshToken
         user.save({validateBeforeSave:false})
         return {accessToken,refreshToken}
@@ -95,13 +102,13 @@ const loginUser = asyncHandler(async(req,res)=>{
 // check is username and password match with database 
 // if match generate access and refresh token and send it to the user
 
-  const [username , email ,password ] =req.body
-  if(!(username || email) ){
+  const {username , email ,password } =req.body
+  if(!username && !email ){
     throw new ApiError(400,"Email or Username is required")
   }
    
    const user = await User.findOne({
-    $or: [{username},{email}]
+    $or: [{ username } , { email }]
    })
 
    if(!user){
@@ -115,7 +122,7 @@ const loginUser = asyncHandler(async(req,res)=>{
 
     const {accessToken,refreshToken}= await generateAccessAndRefreshToken(user._id)
 
-    const loggedInUser = await User.findOne(user._id).select("-password -refreshToken")
+    const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
 
     const  options={
       httpOnly:true,
