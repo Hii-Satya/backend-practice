@@ -1,9 +1,9 @@
 import { Mongoose } from "mongoose";
-import { Like } from "../models/like.model";
-import { Video } from "../models/video.model";
-import { ApiError } from "../utils/ApiError";
-import { ApiResponse } from "../utils/ApiResponse";
-import { asyncHandler } from "../utils/asyncHandler";
+import { Like } from "../models/like.model.js";
+import { Video } from "../models/video.model.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 
 const addLike=asyncHandler(async(req,res)=>{
@@ -118,10 +118,11 @@ const getLikedVideo =asyncHandler(async(req,res)=>{
       },
     }
     ])
-})
-return res
+    return res
     .status(200)
     .json(new ApiResponse(200, likedVideos, "fetched liked videos"));
+})
+
 
 export {
     addLike,

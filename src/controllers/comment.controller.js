@@ -1,8 +1,8 @@
-import { ApiError } from "../utils/ApiError";
-import { ApiResponse } from "../utils/ApiResponse";
-import { asyncHandler } from "../utils/asyncHandler";
-import { Comment } from "../models/comment.model";
-import { Video } from "../models/video.model";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { Comment } from "../models/comment.model.js";
+import { Video } from "../models/video.model.js";
 import mongoose, { mongo } from "mongoose";
 
 

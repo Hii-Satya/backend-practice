@@ -2,8 +2,8 @@ import mongoose, { Mongoose } from "mongoose";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { User } from "../models/user.models.js";
 import {Subscription} from "../models/subscription.model.js"
-import { ApiError } from "../utils/ApiError";
-import { ApiResponse } from "../utils/ApiResponse";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 
 
 const getChannelSubscriber = asyncHandler(async(req,res)=>{
