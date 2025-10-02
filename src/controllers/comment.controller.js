@@ -3,13 +3,13 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { Comment } from "../models/comment.model.js";
 import { Video } from "../models/video.model.js";
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 
 const addComment=asyncHandler(async(req,res)=>{
-    const {content,videoId} =req.body;
+    const {content,videoId} =req.params
     const {commenterUserId} =req.user._id;
-    if(!content.trim || !content || !videoId ){
+    if(!content.trim() || !content || !videoId ){
         throw new ApiError(401,"All field is required")
     }
     const isvideoExist=await Video.findById(videoId);
